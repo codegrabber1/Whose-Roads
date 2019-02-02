@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "176578281391",
+    "firebase_url": "https://whose-roads.firebaseio.com",
+    "project_id": "whose-roads",
+    "storage_bucket": "whose-roads.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176578281391:android:0129c5a8953345d2",
+        "android_client_info": {
+          "package_name": "makecodework.com.whoseroads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176578281391-1gqir0eiknnvbg1m9pht4t78alfbcl82.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "makecodework.com.whoseroads",
+            "certificate_hash": "12aa03499cc972aadf32656121d163562f69b7e0"
+          }
+        },
+        {
+          "client_id": "176578281391-hi8ua0ve350pccmb217ov8mhd8rbloc1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBKAWjjXC-Dt0yXAS9n0d0PJKZpU7-3rc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176578281391-hi8ua0ve350pccmb217ov8mhd8rbloc1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,26 +2,22 @@ package makecodework.com.whoseroads.viewHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import makecodework.com.whoseroads.Interface.ItemClickListener;
 import makecodework.com.whoseroads.R;
 
 public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    public TextView defectName;
-    public TextView defectAddress;
-//    public TextView defectDate;
-    public ImageView imageV;
+    public TextView objName,objPerform,objPrice,objRelease;
 
     private ItemClickListener itemClickListener;
 
     public MenuViewHolder(View itemView) {
         super(itemView);
 
-        defectName = itemView.findViewById(R.id.defect_title);
-        defectAddress = itemView.findViewById(R.id.defect_address);
-        //defectDate = itemView.findViewById(R.id.defect_date);
-        imageV = itemView.findViewById(R.id.road_img);
+        objName = itemView.findViewById(R.id.obj_name);
+        objPerform = itemView.findViewById(R.id.object_performer);
+        objPrice = itemView.findViewById(R.id.object_price);
+        objRelease = itemView.findViewById(R.id.data_release);
 
         itemView.setOnClickListener(this);
     }

@@ -1,40 +1,57 @@
 package makecodework.com.whoseroads.Model;
 
 public class Category {
-    private String Defect;
-    private String Address;
-    private String Image;
+    private String ObjectName, Description, Performer, Price,DataRelease;
+
 
     public Category() {
     }
 
-    public Category(String defect, String address, String image) {
-        Defect = defect;
-        Address = address;
-        Image = image;
+    public Category(String objectName, String description, String performer, String price, String dataRelease) {
+        ObjectName = objectName;
+        Description = description;
+        Performer = performer;
+        Price = price;
+        DataRelease = dataRelease;
     }
 
-    public String getDefect() {
-        return Defect;
+    public String getObjectName() {
+        return ObjectName;
     }
 
-    public void setDefect(String defect) {
-        Defect = defect;
+    public void setObjectName(String objectName) {
+        ObjectName = objectName;
     }
 
-    public String getAddress() {
-        return Address;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setAddress(String address) {
-        Address = address;
+    public void setDescription(String description) {
+        Description = description;
     }
 
-    public String getImage() {
-        return Image;
+    public String getPerformer() {
+        return Performer;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public void setPerformer(String performer) {
+        Performer = performer;
+    }
+
+    public String getPrice() {
+        return Price;
+    }
+
+    public void setPrice(String price) {
+        Price = price;
+    }
+
+    public String getDataRelease() {
+        return DataRelease;
+    }
+
+    public void setDataRelease(String dataRelease) {
+        DataRelease = dataRelease;
     }
 }

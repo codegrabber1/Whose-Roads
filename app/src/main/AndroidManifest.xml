@@ -25,7 +25,8 @@
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme" />
         <activity android:name=".Activities.RoadDetail" />
-        <activity android:name=".Activities.RoadsList"></activity>
+        <activity android:name=".Activities.RoadsList" />
+        <activity android:name=".Activities.InfoDetail"></activity>
     </application>
 
 </manifest>

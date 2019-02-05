@@ -13,48 +13,51 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/defect_address"
+            android:id="@+id/object_performer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="Address"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="Performer"
+            android:textAlignment="center"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/defect_title" />
+            app:layout_constraintTop_toBottomOf="@+id/obj_name" />
 
-        <ImageView
-            android:id="@+id/road_img"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/post_placeholder"
+        <TextView
+            android:id="@+id/obj_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="Object Name"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/defect_title"
+            android:id="@+id/object_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="defect"
-            android:textColor="@color/colorAccent"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Price"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/defect_date" />
+            app:layout_constraintTop_toBottomOf="@+id/object_performer" />
 
         <TextView
-            android:id="@+id/defect_date"
+            android:id="@+id/data_release"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -62,11 +65,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="14.10.2018"
-            app:layout_constraintBottom_toTopOf="@+id/defect_title"
+            android:text="Data Release"
+            android:textAlignment="textEnd"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/road_img" />
+            app:layout_constraintStart_toEndOf="@+id/object_price"
+            app:layout_constraintTop_toBottomOf="@+id/object_performer" />
+
     </android.support.constraint.ConstraintLayout>
 
 </android.support.v7.widget.CardView>

@@ -7,15 +7,20 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Photo" />
+            android:title="@string/make_photo" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_format_indent_increase_black_24dp"
-            android:title="Posts" />
+            android:id="@+id/nav_info"
+            android:icon="@drawable/ic_notifications_black_24dp"
+            android:title="@string/read_info" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_defect"
+            android:icon="@drawable/ic_content_paste_black_24dp"
+            android:title="@string/view_new_photos" />
+        <item
+            android:id="@+id/nav_account"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="Account Setting" />
+            android:title="@string/account_setting" />
+
     </group>
 
     <item android:title="Communicate">
@@ -25,7 +30,7 @@
                 android:icon="@drawable/ic_menu_share"
                 android:title="Share" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_signOut"
                 android:icon="@drawable/ic_exit_to_app_black_24dp"
                 android:title="Sign Out" />
         </menu>

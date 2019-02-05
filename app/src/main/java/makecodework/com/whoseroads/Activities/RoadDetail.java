@@ -51,11 +51,14 @@ public class RoadDetail extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Roads roads = dataSnapshot.getValue(Roads.class);
+
                 Glide.with(getBaseContext()).load(roads.getImage()).into(imageRoad);
 
-                collapsingToolbarLayout.setTitle(roads.getName());
+                collapsingToolbarLayout.setTitle(roads.getDefectName());
 
-                roadName.setText(roads.getName());
+                roadName.setText(roads.getDefectName());
+                roadStreet.setText(roads.getStreet());
+
                 defDescription.setText(roads.getDescription());
 
             }

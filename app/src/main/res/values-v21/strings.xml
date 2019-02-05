@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="make_photo">Make Photo</string>
+    <string name="account_setting">Account Setting</string>
+    <string name="view_new_photos">View new photos</string>
+</resources>

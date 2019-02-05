@@ -20,7 +20,6 @@ public class RoadsList extends AppCompatActivity {
     private RecyclerView roadList;
     private DatabaseReference dataRef;
 
-    private String nameId="";
 
     FirebaseRecyclerAdapter<Roads, RoadsViewHolder> recAdapter;
 
@@ -36,33 +35,30 @@ public class RoadsList extends AppCompatActivity {
         roadList.setHasFixedSize(true);
         roadList.setLayoutManager(new LinearLayoutManager(this));
 
-        if(getIntent() != null){
-            nameId = getIntent().getStringExtra("PostId");
-        }
-
-        if(!nameId.isEmpty() && nameId !=null){
-            loadList(nameId);
-        }
+        loadList();
 
     }
 
-    private void loadList(String nameId) {
+    private void loadList() {
         recAdapter = new FirebaseRecyclerAdapter<Roads, RoadsViewHolder>(
                 Roads.class,
                 R.layout.road_item,
                 RoadsViewHolder.class,
-                dataRef.orderByChild("Postid").equalTo(nameId)
+                dataRef
                 ) {
             @Override
             protected void populateViewHolder(RoadsViewHolder viewHolder, Roads model, int position) {
-                viewHolder.defName.setText(model.getName());
+                viewHolder.defName.setText(model.getDefectName());
+                viewHolder.defStreet.setText(model.getStreet());
                 Glide.with(getBaseContext()).load(model.getImage()).into(viewHolder.defImage);
                 final Roads local = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         Intent roadDetail = new Intent(RoadsList.this, RoadDetail.class);
+
                         roadDetail.putExtra("RoadId",recAdapter.getRef(position).getKey());
+
                         startActivity(roadDetail);
                     }
                 });

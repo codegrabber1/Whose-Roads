@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -89,10 +88,14 @@ public class Home extends AppCompatActivity
         ) {
             @Override
             protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
-                viewHolder.defectName.setText(model.getDefect());
-                viewHolder.defectAddress.setText(model.getAddress());
 
-                Glide.with(getBaseContext()).load(model.getImage()).into(viewHolder.imageV);
+                viewHolder.objName.setText(model.getObjectName());
+
+                viewHolder.objPerform.setText(model.getPerformer());
+
+                viewHolder.objPrice.setText(model.getPrice());
+
+                viewHolder.objRelease.setText(model.getDataRelease());
 
                 final Category clickItem = model;
 
@@ -101,9 +104,9 @@ public class Home extends AppCompatActivity
                     public void onClick(View view, int position, boolean isLongClick) {
 
                         String postId = adapter.getRef(position).getKey();
-                        //Toast.makeText(Home.this, "Post id: "+postId, Toast.LENGTH_SHORT).show();
+
                         // Get PostId and send to new Activity
-                        Intent roadList = new Intent(Home.this, RoadsList.class);
+                        Intent roadList = new Intent(Home.this, InfoDetail.class);
 
                         roadList.putExtra("PostId", adapter.getRef(position).getKey());
 
@@ -158,13 +161,17 @@ public class Home extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_info) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_defect) {
+            Intent roadList = new Intent(Home.this, RoadsList.class);
+            startActivity(roadList);
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_account) {
 
-        } else if (id == R.id.nav_send) {
+        }   else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_signOut) {
 
         }
 

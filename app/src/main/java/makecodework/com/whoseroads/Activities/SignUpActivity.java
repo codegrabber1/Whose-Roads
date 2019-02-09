@@ -15,7 +15,7 @@ import makecodework.com.whoseroads.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText enterPhone, enterPass, enterName;
+    private EditText enterPhone, enterPass, enterName, enterCode;
     private Button signUp;
 
     @Override
@@ -26,6 +26,8 @@ public class SignUpActivity extends AppCompatActivity {
         enterPhone = (MaterialEditText) findViewById(R.id.enter_phone);
         enterPass = (MaterialEditText) findViewById(R.id.enter_pass);
         enterName = (MaterialEditText) findViewById(R.id.enter_name);
+        enterCode = (MaterialEditText) findViewById(R.id.secure_code);
+
         signUp = findViewById(R.id.sign_up);
 
         //FireBase
@@ -50,7 +52,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                         }else{
                             dialog.dismiss();
-                            User user = new User(enterName.getText().toString(), enterPass.getText().toString());
+                            User user = new User(enterName.getText().toString(), enterPass.getText().toString(),enterCode.getText().toString());
                             table_user.child(enterPhone.getText().toString()).setValue(user);
                             Toast.makeText(SignUpActivity.this, "Sign Up successfully!", Toast.LENGTH_SHORT).show();
                             finish();

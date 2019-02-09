@@ -21,7 +21,7 @@
         android:gravity="center"
         android:hint="Your Phone"
         android:inputType="phone"
-        android:text="0983961224"
+        android:text="0983961226"
         android:textColor="@color/white"
         android:textColorHint="@color/input_hint"
         android:textSize="30sp"
@@ -66,5 +66,29 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/checkRemember"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Remember Me"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_pass" />
+
+    <TextView
+        android:id="@+id/forgot_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        android:text="Forgot password?"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_pass" />
 
 </android.support.constraint.ConstraintLayout>

@@ -31,6 +31,24 @@ public class RoadsList extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         dataRef = database.getReference("Roads");
 
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        toolbar.setTitle("List of user's posts");
+//
+//        setSupportActionBar(toolbar);
+
+
+
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+//
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(),Home.class));
+//                finish();
+//            }
+//        });
+
         roadList = findViewById(R.id.road_list);
         roadList.setHasFixedSize(true);
         roadList.setLayoutManager(new LinearLayoutManager(this));

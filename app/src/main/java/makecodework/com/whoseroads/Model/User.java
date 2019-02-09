@@ -1,42 +1,50 @@
 package makecodework.com.whoseroads.Model;
 
 public class User {
-    private String Name;
-    private String Password;
-    private String Phone;
+    private String name;
+    private String password;
     private String isStaff;
+    private String image;
+    private String phone;
+    private String secureCode;
 
     public User() {
     }
 
-    public User(String name, String password) {
-        Name = name;
-        Password = password;
-        isStaff = "false";
+    public User(String name, String password, String secureCode) {
+        this.name = name;
+        this.password = password;
+        this.secureCode = secureCode;
+
     }
 
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
+    public User(String phone, String image) {
+        this.phone = phone;
+        this.image = image;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String phone) {
-        Phone = phone;
+        this.phone = phone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getIsStaff() {
@@ -45,5 +53,21 @@ public class User {
 
     public void setIsStaff(String isStaff) {
         this.isStaff = isStaff;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getSecureCode() {
+        return secureCode;
+    }
+
+    public void setSecureCode(String secureCode) {
+        this.secureCode = secureCode;
     }
 }

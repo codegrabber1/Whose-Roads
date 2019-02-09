@@ -1,47 +1,56 @@
 package makecodework.com.whoseroads.Model;
 
 public class Roads {
-    private String DefectName, Image, Description, Street;
+    private String author, defectName, description, image, street;
 
     public Roads() {
     }
 
-    public Roads(String defectName, String image, String description, String street) {
-        DefectName = defectName;
-        Image = image;
-        Description = description;
-        Street = street;
+    public Roads(String author, String defectName, String description, String image, String street) {
+        this.author = author;
+        this.defectName = defectName;
+        this.description = description;
+        this.image = image;
+        this.street = street;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getDefectName() {
-        return DefectName;
+        return defectName;
     }
 
     public void setDefectName(String defectName) {
-        DefectName = defectName;
-    }
-
-    public String getImage() {
-        return Image;
-    }
-
-    public void setImage(String image) {
-        Image = image;
+        this.defectName = defectName;
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getStreet() {
-        return Street;
+        return street;
     }
 
     public void setStreet(String street) {
-        Street = street;
+        this.street = street;
     }
 }

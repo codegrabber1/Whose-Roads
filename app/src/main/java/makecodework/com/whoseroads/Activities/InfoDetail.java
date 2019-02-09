@@ -1,8 +1,11 @@
 package makecodework.com.whoseroads.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.TextView;
 import com.google.firebase.database.*;
 import makecodework.com.whoseroads.Model.Category;
@@ -14,7 +17,7 @@ public class InfoDetail extends AppCompatActivity {
 
     private String infoId="";
 
-    DatabaseReference infoRef;
+    private DatabaseReference infoRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,21 @@ public class InfoDetail extends AppCompatActivity {
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         infoRef = database.getReference("Posts");
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Read Post");
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),Home.class));
+                finish();
+            }
+        });
 
         ObName = findViewById(R.id.objname);
         ObPerformer = findViewById(R.id.objectperformer);

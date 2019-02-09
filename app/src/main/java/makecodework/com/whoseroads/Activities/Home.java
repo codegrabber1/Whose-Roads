@@ -1,29 +1,47 @@
 package makecodework.com.whoseroads.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.rengwuxian.materialedittext.MaterialEditText;
+import dmax.dialog.SpotsDialog;
+import io.paperdb.Paper;
 import makecodework.com.whoseroads.Common.Common;
 import makecodework.com.whoseroads.Interface.ItemClickListener;
 import makecodework.com.whoseroads.Model.Category;
+import makecodework.com.whoseroads.Model.User;
 import makecodework.com.whoseroads.R;
 import makecodework.com.whoseroads.viewHolder.MenuViewHolder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Home extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,8 +50,10 @@ public class Home extends AppCompatActivity
     private DatabaseReference category;
 
     private TextView menuUserName;
+    private ImageView menuUserLogo;
     private RecyclerView menu_list;
 
+    User user;
     FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
     RecyclerView.LayoutManager layoutManager;
@@ -49,6 +69,8 @@ public class Home extends AppCompatActivity
         // Init Firebase
         database = FirebaseDatabase.getInstance();
         category = database.getReference("Posts");
+
+        Paper.init(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +92,12 @@ public class Home extends AppCompatActivity
 
         View headerView = navigationView.getHeaderView(0);
         menuUserName = headerView.findViewById(R.id.user_fullName);
+        menuUserLogo = headerView.findViewById(R.id.user_img);
         menuUserName.setText(Common.currentUser.getName());
+        if(Common.currentUser.getImage() != null){
+            Glide.with(getBaseContext()).load(Common.currentUser.getImage()).into(menuUserLogo);
+        }
+
 
         //Load menu
         menu_list = findViewById(R.id.menu_list);
@@ -160,23 +187,109 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            Intent i = new Intent(Home.this,AddDefect.class);
+            startActivity(i);
             // Handle the camera action
         } else if (id == R.id.nav_info) {
+
 
         } else if (id == R.id.nav_defect) {
             Intent roadList = new Intent(Home.this, RoadsList.class);
             startActivity(roadList);
 
         } else if (id == R.id.nav_account) {
+            
+            changeUserData();
+//            Intent i = new Intent(Home.this, AccountSetting.class);
+//            startActivity(i);
 
         }   else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_signOut) {
+
+            // Delete remember
+            Paper.book().destroy();
+
+            //LogOut
+            Intent i = new Intent(Home.this, SignInActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
 
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void changeUserData() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Account Settings");
+        //builder.setMessage("Update your data!");
+
+        LayoutInflater inflate = LayoutInflater.from(this);
+        View layout_data = inflate.inflate(R.layout.activity_account_setting,null);
+
+        ImageView accCam;
+        final MaterialEditText yourPass, yourNewPass,repNewPass, yourCode;
+        Button selectPhoto, uploadPhoto, changeBtn;
+
+        yourPass = layout_data.findViewById(R.id.your_pass);
+        yourNewPass = layout_data.findViewById(R.id.your_newpass);
+        repNewPass = layout_data.findViewById(R.id.repeat_newpass);
+        yourCode = layout_data.findViewById(R.id.your_scode);
+
+        yourCode.setText(Common.currentUser.getSecureCode());
+//        changeBtn = layout_data.findViewById(R.id.change_my_data);
+
+        builder.setView(layout_data);
+
+        builder.setPositiveButton("CHANGE", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+               final android.app.AlertDialog waitingDialog = new SpotsDialog.Builder().setContext(Home.this).build();
+               waitingDialog.show();
+
+               if(yourPass.getText().toString().equals(Common.currentUser.getPassword())
+                       && yourCode.getText().toString().equals(Common.currentUser.getSecureCode())){
+                   if(yourNewPass.getText().toString().equals(repNewPass.getText().toString())){
+                       Map<String,Object> dataUpdate = new HashMap<>();
+                       dataUpdate.put("secureCode", yourCode.getText().toString());
+                       dataUpdate.put("password", yourNewPass.getText().toString());
+
+
+                       DatabaseReference user = FirebaseDatabase.getInstance().getReference("User");
+                       user.child(Common.currentUser.getPhone()).updateChildren(dataUpdate)
+                               .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                   @Override
+                                   public void onComplete(@NonNull Task<Void> task) {
+                                       waitingDialog.dismiss();
+                                       Toast.makeText(Home.this, "Data was Update!", Toast.LENGTH_SHORT).show();
+                                   }
+                               }).addOnFailureListener(new OnFailureListener() {
+                           @Override
+                           public void onFailure(@NonNull Exception e) {
+                               Toast.makeText(Home.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                           }
+                       });
+                   }else{
+                       Toast.makeText(Home.this, "New Password doesn't match", Toast.LENGTH_SHORT).show();
+                   }
+               }else{
+                   waitingDialog.dismiss();
+                   Toast.makeText(Home.this, "Wrong Password", Toast.LENGTH_SHORT).show();
+               }
+
+
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.show();
+
     }
 }

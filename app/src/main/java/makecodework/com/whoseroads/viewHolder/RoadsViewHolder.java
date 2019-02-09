@@ -14,12 +14,17 @@ public class RoadsViewHolder extends RecyclerView.ViewHolder implements View.OnC
 
     private ItemClickListener itemClickListener;
 
+
+
+
     public RoadsViewHolder(View itemView) {
         super(itemView);
 
         defName = itemView.findViewById(R.id.defect_name);
         defStreet = itemView.findViewById(R.id.defect_street);
         defImage = itemView.findViewById(R.id.defectroad_img);
+
+
 
         itemView.setOnClickListener(this);
 

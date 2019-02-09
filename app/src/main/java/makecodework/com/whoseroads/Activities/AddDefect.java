@@ -28,15 +28,14 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 import makecodework.com.whoseroads.Common.Common;
 import makecodework.com.whoseroads.Model.Roads;
-import makecodework.com.whoseroads.Model.User;
 import makecodework.com.whoseroads.R;
 
 import java.util.UUID;
 
 public class AddDefect extends AppCompatActivity {
 
-    private MaterialEditText defectRoad, defectStreet, defDesc, setDefect;
-    private Button selectBtn, uploadBtn, addNewBtn;
+    private MaterialEditText defectRoad, defectStreet, defDesc;
+    private Button uploadBtn;
     private ImageView photoCam;
 
     private FirebaseDatabase database;
@@ -55,7 +54,6 @@ public class AddDefect extends AppCompatActivity {
 
     private Toolbar rtoobar;
 
-    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,18 +76,12 @@ public class AddDefect extends AppCompatActivity {
             }
         });
 
-
-
-
         defectRoad = findViewById(R.id.defect_road);
         defectStreet = findViewById(R.id.defect_street);
-        setDefect = findViewById(R.id.defect);
         defDesc = findViewById(R.id.defect_description);
 
 
-//        selectBtn = findViewById(R.id.select_photo);
         uploadBtn = findViewById(R.id.upload_photo);
-        addNewBtn = findViewById(R.id.add_new_road);
 
         photoCam = findViewById(R.id.photo_camera);
 
@@ -98,9 +90,6 @@ public class AddDefect extends AppCompatActivity {
 
         storage = FirebaseStorage.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
-
-
-
 
         uploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,31 +111,6 @@ public class AddDefect extends AppCompatActivity {
             }
 
         });
-
-        addNewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String defectName = defectRoad.getText().toString();
-                final String street = defectStreet.getText().toString();
-
-                final String desc = defDesc.getText().toString();
-                final String author = Common.currentUser.getName();
-
-
-
-                if( !TextUtils.isEmpty(defectName) &&
-                    !TextUtils.isEmpty(street) &&
-                    !TextUtils.isEmpty(desc) &&
-                    !TextUtils.isEmpty(author) && postImageUri != null){
-
-                    reference.push().setValue(newRoad);
-                    Snackbar.make(addRoadLayout,"New post "+newRoad.getDefectName()+" was added", Snackbar.LENGTH_SHORT).show();
-
-                }else{
-                    Toast.makeText(AddDefect.this, "Object is null", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
     }
 
     private void uploadImg() {
@@ -160,22 +124,36 @@ public class AddDefect extends AppCompatActivity {
             filePath.putFile(postImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    progressDialog.dismiss();
-                    Toast.makeText(AddDefect.this, "Uploaded !!!", Toast.LENGTH_SHORT).show();
-                    filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            newRoad = new Roads();
-                            newRoad.setAuthor(Common.currentUser.getPhone());
-                            newRoad.setDefectName(defectRoad.getText().toString());
-                            newRoad.setDescription(defDesc.getText().toString());
-                            newRoad.setStreet(defectStreet.getText().toString());
-                            newRoad.setImage(uri.toString());
+                    final String defectName = defectRoad.getText().toString();
+                    final String street = defectStreet.getText().toString();
 
+                    final String desc = defDesc.getText().toString();
+                    final String author = Common.currentUser.getName();
 
+                    if( !TextUtils.isEmpty(defectName) &&
+                            !TextUtils.isEmpty(street) &&
+                            !TextUtils.isEmpty(desc) &&
+                            !TextUtils.isEmpty(author) && postImageUri != null){
+                        progressDialog.dismiss();
+                        Toast.makeText(AddDefect.this, "Uploaded !!!", Toast.LENGTH_SHORT).show();
+                        filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                newRoad = new Roads();
+                                newRoad.setAuthor(Common.currentUser.getPhone());
+                                newRoad.setDefectName(defectRoad.getText().toString());
+                                newRoad.setDescription(defDesc.getText().toString());
+                                newRoad.setStreet(defectStreet.getText().toString());
+                                newRoad.setImage(uri.toString());
 
-                        }
-                    });
+                                sendData();
+                            }
+                        });
+                    }else{
+                        progressDialog.dismiss();
+                        Toast.makeText(AddDefect.this, "Fill all Fields and try again", Toast.LENGTH_LONG).show();
+                    }
+
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -194,7 +172,18 @@ public class AddDefect extends AppCompatActivity {
                 }
             });
 
+        }else{
+            Toast.makeText(AddDefect.this, "Please, Choose a picture!", Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void sendData() {
+
+        if(newRoad != null){
+            reference.push().setValue(newRoad);
+            Snackbar.make(addRoadLayout,"Повідомлення про "+newRoad.getDefectName()+" додано!", Snackbar.LENGTH_LONG).show();
+        }
+
     }
 
     @Override

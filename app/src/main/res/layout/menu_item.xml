@@ -5,13 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="5dp"
+    app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
             android:id="@+id/object_performer"
             android:layout_width="0dp"
@@ -20,11 +18,13 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="Performer"
-            android:textAlignment="center"
-            android:textSize="18sp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/performer_name"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/perforemer_tag"
             app:layout_constraintTop_toBottomOf="@+id/obj_name" />
 
         <TextView
@@ -35,25 +35,30 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="Object Name"
-            android:textAlignment="center"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/object_name"
+            android:textAlignment="viewStart"
             android:textColor="@color/colorAccent"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/object_tag"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/object_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="Price"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/cost_project"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/cost_tag"
             app:layout_constraintTop_toBottomOf="@+id/object_performer" />
 
         <TextView
@@ -65,12 +70,83 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
-            android:text="Data Release"
-            android:textAlignment="textEnd"
-            android:textSize="15sp"
+            android:text="@string/date_release"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/object_price"
+            app:layout_constraintStart_toEndOf="@+id/date_tag"
+            app:layout_constraintTop_toBottomOf="@+id/object_price" />
+
+        <TextView
+            android:id="@+id/object_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/object_tag"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/perforemer_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/performer_tag"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/object_tag" />
+
+        <TextView
+            android:id="@+id/cost_tag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/cost_tag"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/perforemer_tag" />
+
+        <TextView
+            android:id="@+id/date_tag"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:text="@string/date_of_release_tag"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cost_tag" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto"
+            android:text="грн."
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/object_performer" />
 
     </android.support.constraint.ConstraintLayout>

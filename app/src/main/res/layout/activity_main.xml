@@ -14,7 +14,7 @@
         android:layout_height="225dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="55dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +23,7 @@
 
     <TextView
         android:id="@+id/slogan"
-        android:layout_width="368dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
@@ -37,35 +37,43 @@
         app:layout_constraintBottom_toTopOf="@+id/signin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_img" />
+        app:layout_constraintTop_toBottomOf="@+id/logo_img"
+        app:layout_constraintVertical_bias="0.39" />
 
 
     <Button
         android:id="@+id/signup"
-        android:layout_width="0dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_marginStart="8dp"
         android:layout_weight="1"
+        android:background="@color/com_facebook_blue"
+        android:fontFamily="@font/roboto"
         android:shadowColor="@android:color/black"
         android:text="@string/signup"
-        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/signin"
-        android:layout_width="0dp"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:layout_weight="1"
+        android:background="@color/com_facebook_button_login_background_color"
         android:shadowColor="@android:color/black"
         android:text="@string/sign_in"
-        android:textAllCaps="false"
+        android:textSize="18dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/signup" />
 </android.support.constraint.ConstraintLayout>

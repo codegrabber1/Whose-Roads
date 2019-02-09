@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -20,8 +21,10 @@ public class RoadsList extends AppCompatActivity {
     private RecyclerView roadList;
     private DatabaseReference dataRef;
 
-
+    private Toolbar listToolbar;
     FirebaseRecyclerAdapter<Roads, RoadsViewHolder> recAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,23 +34,19 @@ public class RoadsList extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         dataRef = database.getReference("Roads");
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        toolbar.setTitle("List of user's posts");
-//
-//        setSupportActionBar(toolbar);
+        listToolbar = findViewById(R.id.list_toolbar);
+        listToolbar.setTitle("List");
+        setSupportActionBar(listToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(getApplicationContext(),Home.class));
-//                finish();
-//            }
-//        });
+        listToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Home.class));
+            }
+        });
 
         roadList = findViewById(R.id.road_list);
         roadList.setHasFixedSize(true);

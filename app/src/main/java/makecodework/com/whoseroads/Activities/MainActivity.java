@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.facebook.FacebookSdk;
 import com.google.firebase.database.*;
 import io.paperdb.Paper;
 import makecodework.com.whoseroads.Common.Common;
@@ -26,13 +27,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
+
+
 
         SIgnIn = findViewById(R.id.signin);
         SIgnUp = findViewById(R.id.signup);
         slogan = findViewById(R.id.slogan);
         logo = findViewById(R.id.logo_img);
-
 
         Paper.init(this);
 
@@ -54,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         String user = Paper.book().read(Common.USER_KEY);
         String pwd = Paper.book().read(Common.USER_PSW);
 
@@ -61,8 +66,13 @@ public class MainActivity extends AppCompatActivity {
             if(user.isEmpty() && pwd.isEmpty()){
                 login(user,pwd);
             }
+
         }
+
+
+
     }
+
 
     private void login(final String phone, final String pwd) {
 
@@ -108,6 +118,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
 }

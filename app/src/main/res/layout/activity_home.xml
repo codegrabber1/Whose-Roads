@@ -18,12 +18,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        android:textSize="20sp"
         android:background="@color/white"
-        app:itemTextColor="@color/overlayActionBar"
-        app:itemIconTint="@color/white"
+        android:fitsSystemWindows="true"
+        android:textSize="24sp"
         app:headerLayout="@layout/nav_header_home"
+        app:itemIconTint="@color/overlayActionBar"
+        app:itemTextColor="@color/cardview_dark_background"
         app:menu="@menu/activity_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

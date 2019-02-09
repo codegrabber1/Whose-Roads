@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    app:cardElevation="5dp"
+    app:cardElevation="2dp"
     app:cardUseCompatPadding="true">
 
     <android.support.constraint.ConstraintLayout
@@ -33,7 +33,7 @@
             android:fontFamily="@font/roboto"
             android:text="defect"
             android:textColor="@color/colorAccent"
-            android:textSize="20sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/defectroad_img" />
@@ -48,7 +48,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:text="Street"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

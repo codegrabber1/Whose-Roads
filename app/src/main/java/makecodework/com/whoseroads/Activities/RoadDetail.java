@@ -126,7 +126,11 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final Roads roads = dataSnapshot.getValue(Roads.class);
 
-                Glide.with(getBaseContext()).load(roads.getImage()).into(imageRoad);
+                if(roads.getImage() != null){
+                    Glide.with(getBaseContext()).load(roads.getImage()).into(imageRoad);
+                }
+
+
 
                 collapsingToolbarLayout.setTitle(roads.getDefectName());
 

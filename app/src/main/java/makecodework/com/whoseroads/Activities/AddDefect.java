@@ -2,7 +2,6 @@ package makecodework.com.whoseroads.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,12 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.maps.GoogleMap;
+
 import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -35,19 +30,18 @@ import com.google.firebase.storage.UploadTask;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.util.UUID;
+
 import makecodework.com.whoseroads.Common.Common;
 import makecodework.com.whoseroads.Model.Roads;
 import makecodework.com.whoseroads.R;
 
-import java.util.UUID;
-
-public class AddDefect extends AppCompatActivity implements OnMapReadyCallback {
+public class AddDefect extends AppCompatActivity {
 
     private MaterialEditText defectRoad, defectStreet, defDesc;
-    private Button uploadBtn;
     private ImageView photoCam;
 
-    private FirebaseDatabase database;
     private DatabaseReference reference;
 
     private FirebaseStorage storage;
@@ -57,19 +51,12 @@ public class AddDefect extends AppCompatActivity implements OnMapReadyCallback {
 
     Roads newRoad;
 
-    private MapView mapView;
-
     private String author;
 
     CoordinatorLayout addRoadLayout;
 
     private Toolbar rtoobar;
 
-    FusedLocationProviderClient fusedLocationProviderClient;
-    LocationCallback locationCallback;
-    LocationRequest locationRequest;
-
-    Location location;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -98,14 +85,11 @@ public class AddDefect extends AppCompatActivity implements OnMapReadyCallback {
         defectStreet = findViewById(R.id.defect_street);
         defDesc = findViewById(R.id.defect_description);
 
-        mapView = findViewById(R.id.set_mapView);
-
-
-        uploadBtn = findViewById(R.id.upload_photo);
+        Button uploadBtn = findViewById(R.id.upload_photo);
 
         photoCam = findViewById(R.id.photo_camera);
 
-        database = FirebaseDatabase.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
         reference = database.getReference("Roads");
 
         storage = FirebaseStorage.getInstance();
@@ -132,21 +116,8 @@ public class AddDefect extends AppCompatActivity implements OnMapReadyCallback {
 
         });
 
-        initGoogleMap(savedInstanceState);
-
-
     }
 
-    private void initGoogleMap(Bundle savedInstanceState){
-        Bundle mapBundleView = null;
-        if(savedInstanceState != null){
-            mapBundleView = savedInstanceState.getBundle(Common.MAPVIEW_BUNDLE_KEY);
-
-            mapView.onCreate(mapBundleView);
-            mapView.getMapAsync(this);
-        }
-
-    }
 
     private void uploadImg() {
         if (postImageUri != null) {
@@ -237,9 +208,5 @@ public class AddDefect extends AppCompatActivity implements OnMapReadyCallback {
     }
 
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-
-    }
 }
 

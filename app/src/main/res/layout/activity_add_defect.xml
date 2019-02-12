@@ -100,7 +100,7 @@
                         app:met_floatingLabelAnimating="true"
                         app:met_maxCharacters="30"
                         app:met_primaryColor="@color/colorPrimary"
-                        app:met_singleLineEllipsis="false" />
+                        app:met_singleLineEllipsis="true" />
 
 
                 </android.support.constraint.ConstraintLayout>

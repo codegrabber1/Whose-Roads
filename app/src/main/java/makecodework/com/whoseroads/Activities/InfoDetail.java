@@ -66,7 +66,7 @@ public class InfoDetail extends AppCompatActivity {
                 ObName.setText(category.getObjectName());
                 ObPerformer.setText(category.getPerformer());
                 ObPrice.setText(category.getPrice());
-                ObRelease.setText(category.getDataRelease());
+                ObRelease.setText(category.getDateRelease());
                 ObDescription.setText(category.getDescription());
             }
 

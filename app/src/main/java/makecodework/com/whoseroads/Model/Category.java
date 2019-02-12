@@ -1,7 +1,7 @@
 package makecodework.com.whoseroads.Model;
 
 public class Category {
-    private String ObjectName, Description, Performer, Price,DataRelease;
+    private String ObjectName, Description, Performer, Price, DateRelease;
 
 
     public Category() {
@@ -12,7 +12,7 @@ public class Category {
         Description = description;
         Performer = performer;
         Price = price;
-        DataRelease = dataRelease;
+        DateRelease = dataRelease;
     }
 
     public String getObjectName() {
@@ -47,11 +47,11 @@ public class Category {
         Price = price;
     }
 
-    public String getDataRelease() {
-        return DataRelease;
+    public String getDateRelease() {
+        return DateRelease;
     }
 
-    public void setDataRelease(String dataRelease) {
-        DataRelease = dataRelease;
+    public void setDateRelease(String dateRelease) {
+        DateRelease = dateRelease;
     }
 }

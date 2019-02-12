@@ -33,4 +33,6 @@
     <string name="road_name">Road Name</string>
     <string name="facebook_app_id">653883381696043</string>
     <string name="facebook_login_protocol_name">fb653883381696043</string>
+    <string name="title_activity_g_map">Map</string>
+    <string name="google_maps_key">AIzaSyBHz0gBOtJJG3u72ZeEE_lIJQyGmAwBSHI</string>
 </resources>

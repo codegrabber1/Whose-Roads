@@ -2,10 +2,13 @@ package makecodework.com.whoseroads.Activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +18,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +41,7 @@ import makecodework.com.whoseroads.R;
 
 import java.util.UUID;
 
-public class AddDefect extends AppCompatActivity {
+public class AddDefect extends AppCompatActivity implements OnMapReadyCallback {
 
     private MaterialEditText defectRoad, defectStreet, defDesc;
     private Button uploadBtn;
@@ -48,12 +57,21 @@ public class AddDefect extends AppCompatActivity {
 
     Roads newRoad;
 
+    private MapView mapView;
+
     private String author;
 
     CoordinatorLayout addRoadLayout;
 
     private Toolbar rtoobar;
 
+    FusedLocationProviderClient fusedLocationProviderClient;
+    LocationCallback locationCallback;
+    LocationRequest locationRequest;
+
+    Location location;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +89,7 @@ public class AddDefect extends AppCompatActivity {
         rtoobar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AddDefect.this, Home.class);
+                Intent i = new Intent(AddDefect.this, RoadsList.class);
                 startActivity(i);
             }
         });
@@ -79,6 +97,8 @@ public class AddDefect extends AppCompatActivity {
         defectRoad = findViewById(R.id.defect_road);
         defectStreet = findViewById(R.id.defect_street);
         defDesc = findViewById(R.id.defect_description);
+
+        mapView = findViewById(R.id.set_mapView);
 
 
         uploadBtn = findViewById(R.id.upload_photo);
@@ -104,23 +124,38 @@ public class AddDefect extends AppCompatActivity {
             public void onClick(View v) {
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
-                        .setMinCropResultSize(512,512)
-                        .setAspectRatio(1,1)
+                        .setMinCropResultSize(512, 512)
+                        .setAspectRatio(1, 1)
                         .start(AddDefect.this);
 
             }
 
         });
+
+        initGoogleMap(savedInstanceState);
+
+
+    }
+
+    private void initGoogleMap(Bundle savedInstanceState){
+        Bundle mapBundleView = null;
+        if(savedInstanceState != null){
+            mapBundleView = savedInstanceState.getBundle(Common.MAPVIEW_BUNDLE_KEY);
+
+            mapView.onCreate(mapBundleView);
+            mapView.getMapAsync(this);
+        }
+
     }
 
     private void uploadImg() {
-        if(postImageUri != null ){
+        if (postImageUri != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Uploading...");
             progressDialog.show();
 
             String randomName = UUID.randomUUID().toString();
-            final StorageReference filePath = storageReference.child("image/"+randomName);
+            final StorageReference filePath = storageReference.child("image/" + randomName);
             filePath.putFile(postImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -130,10 +165,10 @@ public class AddDefect extends AppCompatActivity {
                     final String desc = defDesc.getText().toString();
                     final String author = Common.currentUser.getName();
 
-                    if( !TextUtils.isEmpty(defectName) &&
+                    if (!TextUtils.isEmpty(defectName) &&
                             !TextUtils.isEmpty(street) &&
                             !TextUtils.isEmpty(desc) &&
-                            !TextUtils.isEmpty(author) && postImageUri != null){
+                            !TextUtils.isEmpty(author) && postImageUri != null) {
                         progressDialog.dismiss();
                         Toast.makeText(AddDefect.this, "Uploaded !!!", Toast.LENGTH_SHORT).show();
                         filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -149,7 +184,7 @@ public class AddDefect extends AppCompatActivity {
                                 sendData();
                             }
                         });
-                    }else{
+                    } else {
                         progressDialog.dismiss();
                         Toast.makeText(AddDefect.this, "Fill all Fields and try again", Toast.LENGTH_LONG).show();
                     }
@@ -160,28 +195,28 @@ public class AddDefect extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(AddDefect.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddDefect.this, "" + e.getMessage(), Toast.LENGTH_SHORT).show();
 
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred()/taskSnapshot.getTotalByteCount());
-                    progressDialog.setMessage("Uploaded "+progress+"%");
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploaded " + progress + "%");
 
                 }
             });
 
-        }else{
+        } else {
             Toast.makeText(AddDefect.this, "Please, Choose a picture!", Toast.LENGTH_LONG).show();
         }
     }
 
     private void sendData() {
 
-        if(newRoad != null){
+        if (newRoad != null) {
             reference.push().setValue(newRoad);
-            Snackbar.make(addRoadLayout,"Повідомлення про "+newRoad.getDefectName()+" додано!", Snackbar.LENGTH_LONG).show();
+            Snackbar.make(addRoadLayout, "Повідомлення про " + newRoad.getDefectName() + " додано!", Snackbar.LENGTH_LONG).show();
         }
 
     }
@@ -200,4 +235,11 @@ public class AddDefect extends AppCompatActivity {
             }
         }
     }
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+
+    }
 }
+

@@ -5,22 +5,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.RoadsList">
+    tools:context=".Activities.RoadsList"
+    >
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
-
         <android.support.v7.widget.Toolbar
-            android:id="@+id/list_toolbar"
+            android:id="@+id/listToolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/road_list_home"/>
+    <include layout="@layout/road_list_home" />
 
 
 </android.support.design.widget.CoordinatorLayout>

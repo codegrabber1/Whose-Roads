@@ -7,10 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import makecodework.com.whoseroads.Interface.ItemClickListener;
 import makecodework.com.whoseroads.Model.Roads;
 import makecodework.com.whoseroads.R;
@@ -22,31 +24,33 @@ public class RoadsList extends AppCompatActivity {
     private DatabaseReference dataRef;
 
     private Toolbar listToolbar;
+
     FirebaseRecyclerAdapter<Roads, RoadsViewHolder> recAdapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_roads_list);
 
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         dataRef = database.getReference("Roads");
 
-        listToolbar = findViewById(R.id.list_toolbar);
-        listToolbar.setTitle("List");
+
+        listToolbar = findViewById(R.id.listToolbar);
         setSupportActionBar(listToolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
         listToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Home.class));
+            public void onClick(View v) {
+                Intent i = new Intent(RoadsList.this, Home.class);
+                startActivity(i);
             }
         });
+
 
         roadList = findViewById(R.id.road_list);
         roadList.setHasFixedSize(true);
@@ -56,13 +60,14 @@ public class RoadsList extends AppCompatActivity {
 
     }
 
+
     private void loadList() {
         recAdapter = new FirebaseRecyclerAdapter<Roads, RoadsViewHolder>(
                 Roads.class,
                 R.layout.road_item,
                 RoadsViewHolder.class,
                 dataRef
-                ) {
+        ) {
             @Override
             protected void populateViewHolder(RoadsViewHolder viewHolder, Roads model, int position) {
                 viewHolder.defName.setText(model.getDefectName());

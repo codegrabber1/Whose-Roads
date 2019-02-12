@@ -10,22 +10,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.facebook.CallbackManager;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.firebase.database.*;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import makecodework.com.whoseroads.Common.Common;
 import makecodework.com.whoseroads.Model.Roads;
 import makecodework.com.whoseroads.R;
 
-public class RoadDetail extends AppCompatActivity {
+public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback {
 
     private TextView roadName, roadStreet, defDescription;
     private ImageView imageRoad;
     private FloatingActionButton fab;
+    private MapView mapView;
+
+    private GoogleMap gmap;
     CollapsingToolbarLayout collapsingToolbarLayout;
 
     private String roadId="";
@@ -36,6 +44,7 @@ public class RoadDetail extends AppCompatActivity {
     ShareDialog shareDialog;
 
     Roads road;
+
 
     // Get Bitmap from pictures.
     Target target = new Target() {
@@ -76,16 +85,13 @@ public class RoadDetail extends AppCompatActivity {
         imageRoad = findViewById(R.id.img_road);
         fab = findViewById(R.id.floatingfb);
 
-
-
         collapsingToolbarLayout = findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
 
+        mapView = findViewById(R.id.set_mapView);
 
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
-
-
 
 
         if(getIntent() != null){
@@ -95,8 +101,24 @@ public class RoadDetail extends AppCompatActivity {
             loadDetail(roadId);
         }
 
+        initGoogleMap(savedInstanceState);
+
     }
 
+
+    private void initGoogleMap(Bundle savedInstanceState) {
+        Bundle bundle = null;
+        if (savedInstanceState != null) {
+            bundle = savedInstanceState.getBundle(Common.MAPVIEW_BUNDLE_KEY);
+
+        }
+        mapView = findViewById(R.id.set_mapView);
+        mapView.onCreate(bundle);
+
+        mapView.getMapAsync(this);
+
+
+    }
 
     private void loadDetail(String roadId) {
         reference.child(roadId).addValueEventListener(new ValueEventListener() {
@@ -120,7 +142,7 @@ public class RoadDetail extends AppCompatActivity {
                     }
                 });
 
-
+                loadMap(roadStreet);
             }
 
             @Override
@@ -128,5 +150,17 @@ public class RoadDetail extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void loadMap(TextView roadStreet) {
+        final String map = roadStreet.getText().toString();
+//        Toast.makeText(this, "Street: "+map, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        gmap = googleMap;
+
+//        Toast.makeText(this, "Map is ready", Toast.LENGTH_SHORT).show();
     }
 }

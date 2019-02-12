@@ -23,7 +23,7 @@
         android:textSize="24sp"
         app:headerLayout="@layout/nav_header_home"
         app:itemIconTint="@color/overlayActionBar"
-        app:itemTextColor="@color/cardview_dark_background"
+        app:itemTextColor="@color/dark_background"
         app:menu="@menu/activity_home_drawer" />
 
 </android.support.v4.widget.DrawerLayout>

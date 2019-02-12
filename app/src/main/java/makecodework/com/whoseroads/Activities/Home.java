@@ -71,14 +71,6 @@ public class Home extends AppCompatActivity
 
         Paper.init(this);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -94,7 +86,7 @@ public class Home extends AppCompatActivity
         menuUserLogo = headerView.findViewById(R.id.user_img);
         menuUserName.setText(Common.currentUser.getName());
         if(Common.currentUser.getImage() != null){
-            Glide.with(getBaseContext()).load(Common.currentUser.getImage()).into(menuUserLogo);
+            Glide.with(getBaseContext()).load(R.drawable.logo).into(menuUserLogo);
         }
 
         //Load menu
@@ -124,7 +116,7 @@ public class Home extends AppCompatActivity
 
                 viewHolder.objPrice.setText(model.getPrice());
 
-                viewHolder.objRelease.setText(model.getDataRelease());
+                viewHolder.objRelease.setText(model.getDateRelease());
 
                 final Category clickItem = model;
 
@@ -197,6 +189,7 @@ public class Home extends AppCompatActivity
         } else if (id == R.id.nav_defect) {
             Intent roadList = new Intent(Home.this, RoadsList.class);
             startActivity(roadList);
+            finish();
 
         } else if (id == R.id.nav_account) {
             

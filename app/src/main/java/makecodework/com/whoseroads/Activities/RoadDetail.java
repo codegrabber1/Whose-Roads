@@ -1,7 +1,10 @@
 package makecodework.com.whoseroads.Activities;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -16,12 +19,23 @@ import com.facebook.CallbackManager;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.*;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.io.IOException;
+import java.util.List;
+
 import makecodework.com.whoseroads.Common.Common;
 import makecodework.com.whoseroads.Model.Roads;
 import makecodework.com.whoseroads.R;
@@ -31,7 +45,6 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
     private TextView roadName, roadStreet, defDescription;
     private ImageView imageRoad;
     private FloatingActionButton fab;
-    private MapView mapView;
 
     private GoogleMap gmap;
     CollapsingToolbarLayout collapsingToolbarLayout;
@@ -51,7 +64,7 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             SharePhoto photo = new SharePhoto.Builder().setBitmap(bitmap).build();
-            if(shareDialog.canShow(SharePhotoContent.class)){
+            if(ShareDialog.canShow(SharePhotoContent.class)){
                 SharePhotoContent content = new SharePhotoContent.Builder()
                         .addPhoto(photo)
                         .build();
@@ -74,7 +87,15 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_road_detail);
+        if(googleServiceAvilable()){
+
+            setContentView(R.layout.activity_road_detail);
+            
+            initMap();
+        }else{
+            // No google map
+        }
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         reference = database.getReference("Roads");
@@ -88,8 +109,6 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
         collapsingToolbarLayout = findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppbar);
 
-        mapView = findViewById(R.id.set_mapView);
-
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
 
@@ -101,23 +120,28 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
             loadDetail(roadId);
         }
 
-        initGoogleMap(savedInstanceState);
+
 
     }
 
+    private void initMap() {
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.set_mapView);
+        mapFragment.getMapAsync(this);
+    }
 
-    private void initGoogleMap(Bundle savedInstanceState) {
-        Bundle bundle = null;
-        if (savedInstanceState != null) {
-            bundle = savedInstanceState.getBundle(Common.MAPVIEW_BUNDLE_KEY);
+    public boolean googleServiceAvilable(){
+        GoogleApiAvailability api = GoogleApiAvailability.getInstance();
+        int isAvalibale = api.isGooglePlayServicesAvailable(this);
+        if(isAvalibale == ConnectionResult.SUCCESS){
+            return true;
+        }else if(api.isUserResolvableError(isAvalibale)){
+            Dialog dialog = api.getErrorDialog(this, isAvalibale, 0);
+            dialog.show();
 
+        }else{
+            Toast.makeText(this, "Cannot connect to play services", Toast.LENGTH_SHORT).show();
         }
-        mapView = findViewById(R.id.set_mapView);
-        mapView.onCreate(bundle);
-
-        mapView.getMapAsync(this);
-
-
+        return false;
     }
 
     private void loadDetail(String roadId) {
@@ -129,8 +153,6 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
                 if(roads.getImage() != null){
                     Glide.with(getBaseContext()).load(roads.getImage()).into(imageRoad);
                 }
-
-
 
                 collapsingToolbarLayout.setTitle(roads.getDefectName());
 
@@ -146,7 +168,11 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
                     }
                 });
 
-                loadMap(roadStreet);
+                try {
+                    getLocation(roads.getStreet(),roads.getDefectName());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -156,15 +182,39 @@ public class RoadDetail extends AppCompatActivity implements OnMapReadyCallback 
         });
     }
 
-    private void loadMap(TextView roadStreet) {
-        final String map = roadStreet.getText().toString();
-//        Toast.makeText(this, "Street: "+map, Toast.LENGTH_SHORT).show();
+    private void getLocation(String street, String name) throws IOException {
+        gmap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        Geocoder gc = new Geocoder(this);
+        List<Address> list = gc.getFromLocationName(street,1);
+        Address address = list.get(0);
+        String locality = address.getLocality();
+        double lat = address.getLatitude();
+        double lng = address.getLongitude();
+        goToLocationZoom(lat,lng,16);
+
+        MarkerOptions options = new MarkerOptions()
+                .title(street)
+                .position(new LatLng(lat,lng))
+                .snippet(name);
+        gmap.addMarker(options);
     }
+
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         gmap = googleMap;
+        goToLocationZoom(49.4312234,31.9790181,16f);
+    }
 
-//        Toast.makeText(this, "Map is ready", Toast.LENGTH_SHORT).show();
+    private void goToLocation(double lat, double lng) {
+        LatLng ll = new LatLng(lat,lng);
+        CameraUpdate update = CameraUpdateFactory.newLatLng(ll);
+        gmap.moveCamera(update);
+    }
+
+    private void goToLocationZoom(double lat, double lng, float zoom) {
+        LatLng ll = new LatLng(lat,lng);
+        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(ll,zoom);
+        gmap.moveCamera(update);
     }
 }

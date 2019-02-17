@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="4dp">
+    app:cardElevation="1dp">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/enter_phone"
-            android:layout_width="368dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:hint="Your Phone"
+            android:hint="@string/your_phone"
             android:inputType="phone"
-            android:text="0983961224"
+            android:text=""
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/input_hint"
             android:textSize="30sp"
@@ -38,9 +38,9 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:hint="Your Secure Code"
+            android:hint="@string/secure_code"
             android:inputType="text"
-            android:text="abs123"
+            android:text=""
             android:textColor="@color/colorPrimary"
             android:textColorHint="@color/input_hint"
             android:textSize="30sp"

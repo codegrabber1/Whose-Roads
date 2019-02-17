@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="make_photo">Make Photo</string>
+    <string name="account_setting">Change Password</string>
+    <string name="view_new_photos">View new photos</string>
+    <string name="password">Password</string>
+    <string name="new_password">New Password</string>
+    <string name="repeat_new_password">Repeat New Password</string>
+    <string name="add_post">Add Post</string>
+    <string name="upload_btn">Upload</string>
+    <string name="description">Description</string>
+    <string name="specify_the_defect">Specify the defect</string>
+    <string name="street">Street</string>
+    <string name="performer_name">Performer</string>
+    <string name="object_name">Object Name</string>
+    <string name="cost_project">Price</string>
+    <string name="date_release">Date Release</string>
+    <string name="object_tag">Object:</string>
+    <string name="performer_tag">Performer:</string>
+    <string name="cost_tag">Cost of the project:</string>
+    <string name="date_of_release_tag">Date of Release:</string>
+    <string name="currency">грн.</string>
+    <string name="road_name">Road Name</string>
+    <string name="facebook_app_id">653883381696043</string>
+    <string name="facebook_login_protocol_name">fb653883381696043</string>
+    <string name="camera">camera</string>
+    <string name="verify">Verify</string>
+    <string name="send_code_verification">Send code Verification</string>
+    <string name="your_name">Your name</string>
+    <string name="your_phone">Your phone</string>
+    <string name="secure_code">Secure Code</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="register">register</string>
+    <string name="cherkasy_city">Cherkasy</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="welcome">Давайте знайомитись</string>
+    <string name="ex_phone">+38096123456</string>
+    <string name="labe_secure">Код безпеки потрібен для відновлення пароля. Запам\'ятайте його!</string>
+    <string name="about">About App</string>
+    <string name="click_on_camera">To add a photo, click on the camera image</string>
+</resources>

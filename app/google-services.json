@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:176578281391:android:0129c5a8953345d2",
+        "mobilesdk_app_id": "1:176578281391:android:feeb22e79d294dfc",
         "android_client_info": {
-          "package_name": "makecodework.com.whoseroads"
+          "package_name": "makecodework.com.pits"
         }
       },
       "oauth_client": [
         {
-          "client_id": "176578281391-r0oagoo6o5no6lhgecim2ah53dc30dlm.apps.googleusercontent.com",
+          "client_id": "176578281391-ki8qkh5sk9l6c07b3j4oc6ocq4654ukj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "makecodework.com.whoseroads",
+            "package_name": "makecodework.com.pits",
             "certificate_hash": "12aa03499cc972aadf32656121d163562f69b7e0"
           }
         },

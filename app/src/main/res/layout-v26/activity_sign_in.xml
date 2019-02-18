@@ -9,7 +9,6 @@
     android:layout_gravity="center"
     tools:context=".Activities.SignInActivity">
 
-
     <ImageView
         android:id="@+id/logo_img"
         android:layout_width="282dp"
@@ -31,6 +30,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:autofillHints="@string/your_phone"
         android:fontFamily="@font/roboto"
         android:gravity="center"
         android:hint="@string/your_phone"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_img"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.17000002" />
 
     <EditText
         android:id="@+id/enter_pass"
@@ -53,11 +53,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:padding="15dp"
         android:fontFamily="@font/roboto"
         android:gravity="center"
         android:hint="@string/password"
+        android:autofillHints="@string/password"
         android:inputType="textPassword"
+        android:padding="15dp"
         android:text=""
         android:textColor="@color/white"
         android:textColorHint="@color/input_hint"
@@ -68,7 +69,7 @@
 
     <Button
         android:id="@+id/sign_in"
-        style="@android:style/Widget.Holo.Light.Button"
+        style="@android:style/Widget.Material.Button.Borderless"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

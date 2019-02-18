@@ -28,6 +28,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name="makecodework.com.pits.Activities.AboutDetail" />
         <activity android:name="makecodework.com.pits.Activities.AuthActivity" />
         <activity android:name="makecodework.com.pits.Activities.StartActivity">
             <intent-filter>

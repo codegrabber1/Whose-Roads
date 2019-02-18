@@ -36,7 +36,7 @@
     <string name="sign_in">Увійти</string>
     <string name="signup">Зареєструватися</string>
     <string name="specify_the_defect">Вкажіть дефект</string>
-    <string name="street">Вулиця</string>
+    <string name="street">Місто, вулиця, номер</string>
     <string name="title_activity_auth">Авторизація телефону</string>
     <string name="title_activity_g_map">Мапа</string>
     <string name="title_activity_home">Головна</string>
@@ -46,7 +46,7 @@
     <string name="verify">Перевірка</string>
     <string name="your_name">Ваше ім\'я</string>
     <string name="your_phone">Ваш телефон</string>
-    <string name="secure_code">Код безпеки</string>
+    <string name="secure_code">Ваш код безпеки</string>
     <string name="remember_me">Запам\'ятати мене</string>
     <string name="forgot_password">Забули пароль?</string>
     <string name="register">Реєстрація</string>

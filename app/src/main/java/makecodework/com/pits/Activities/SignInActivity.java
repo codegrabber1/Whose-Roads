@@ -34,8 +34,8 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        enterPhone = (MaterialEditText) findViewById(R.id.enter_phone);
-        enterPass = (MaterialEditText) findViewById(R.id.enter_pass);
+        enterPhone = findViewById(R.id.enter_phone);
+        enterPass = findViewById(R.id.enter_pass);
         forgotPass = findViewById(R.id.forgot_pass);
         signIn = (Button) findViewById(R.id.sign_in);
 

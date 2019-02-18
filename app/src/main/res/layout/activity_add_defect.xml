@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                app:cardElevation="2dp"
+                app:cardElevation="1dp"
                 app:cardUseCompatPadding="true">
 
                 <android.support.constraint.ConstraintLayout
@@ -46,8 +46,8 @@
 
                     <ImageView
                         android:id="@+id/photo_camera"
-                        android:layout_width="117dp"
-                        android:layout_height="115dp"
+                        android:layout_width="110dp"
+                        android:layout_height="108dp"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
                         android:contentDescription="@string/camera"
@@ -83,7 +83,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="0dp"
                         android:layout_marginEnd="8dp"
                         android:fontFamily="@font/roboto"
                         android:hint="@string/street"
@@ -103,6 +103,36 @@
                         app:met_primaryColor="@color/colorPrimary"
                         app:met_singleLineEllipsis="true" />
 
+                    <com.rengwuxian.materialedittext.MaterialEditText
+                        android:id="@+id/defect_description"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_margin="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/roboto"
+                        android:gravity="end"
+                        android:hint="@string/description"
+                        android:inputType="textMultiLine"
+                        android:lineSpacingMultiplier="1.5"
+                        android:maxLength="300"
+                        android:padding="0dp"
+                        android:singleLine="false"
+                        android:textAlignment="textEnd"
+                        android:textAllCaps="false"
+                        android:textColorHint="@color/colorPrimary"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/defect_street"
+                        app:met_floatingLabel="highlight"
+                        app:met_floatingLabelAnimating="true"
+                        app:met_maxCharacters="300"
+                        app:met_primaryColor="@color/colorPrimary"
+                        app:met_singleLineEllipsis="false" />
+
                     <TextView
                         android:id="@+id/info_camera"
                         android:layout_width="0dp"
@@ -113,44 +143,13 @@
                         android:fontFamily="@font/roboto"
                         android:padding="8dp"
                         android:text="@string/click_on_camera"
+                        android:textAlignment="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/photo_camera"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
                 </android.support.constraint.ConstraintLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
-
-                <com.rengwuxian.materialedittext.MaterialEditText
-                    android:id="@+id/defect_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_margin="8dp"
-                    android:fontFamily="@font/roboto"
-                    android:gravity="end"
-                    android:hint="@string/description"
-                    android:inputType="textMultiLine"
-                    android:lineSpacingMultiplier="1.5"
-                    android:maxLength="300"
-                    android:padding="3dp"
-                    android:singleLine="false"
-                    android:textAlignment="textEnd"
-                    android:textAllCaps="false"
-                    android:textColorHint="@color/colorPrimary"
-                    android:textSize="20sp"
-                    app:met_floatingLabel="highlight"
-                    app:met_floatingLabelAnimating="true"
-                    app:met_maxCharacters="300"
-                    app:met_primaryColor="@color/colorPrimary"
-                    app:met_singleLineEllipsis="false" />
-
 
             </android.support.v7.widget.CardView>
 

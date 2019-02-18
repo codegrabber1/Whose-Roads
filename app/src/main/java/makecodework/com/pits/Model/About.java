@@ -1,29 +1,29 @@
 package makecodework.com.pits.Model;
 
 public class About {
-    private String title, description;
+    private String aboutTitle, fullText;
 
     public About() {
     }
 
-    public About(String title, String description) {
-        this.title = title;
-        this.description = description;
+    public About(String aboutTitle, String fullText) {
+        this.aboutTitle = aboutTitle;
+        this.fullText = fullText;
     }
 
-    public String getTitle() {
-        return title;
+    public String getAboutTitle() {
+        return aboutTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setAboutTitle(String aboutTitle) {
+        this.aboutTitle = aboutTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFullText() {
+        return fullText;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFullText(String fullText) {
+        this.fullText = fullText;
     }
 }

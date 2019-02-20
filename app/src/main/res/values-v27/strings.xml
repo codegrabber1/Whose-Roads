@@ -35,9 +35,9 @@
     <string name="cherkasy_city">Cherkasy</string>
     <string name="sign_out">Sign Out</string>
     <string name="send_sms">Send SMS</string>
-    <string name="welcome">Давайте знайомитись</string>
+    <string name="welcome">Let\'s get acquainted</string>
     <string name="ex_phone">+38096123456</string>
-    <string name="labe_secure">Код безпеки потрібен для відновлення пароля. Запам\'ятайте його!</string>
+    <string name="labe_secure">The security code is required to recover the password. Remember it!</string>
     <string name="about">About App</string>
     <string name="click_on_camera">To add a photo, click on the camera image</string>
 </resources>
